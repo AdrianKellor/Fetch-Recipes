@@ -17,9 +17,9 @@ class Meal: Observable, Identifiable {
             return nil
         }
         
-        strMeal = values["strMeal"] as? String
-        strMealThumb = values["strMealThumb"] as? String
-        idMeal = values["idMeal"] as? String
+        strMeal = (values["strMeal"] as? String)?.trimmingCharacters(in: .whitespacesAndNewlines)
+        strMealThumb = (values["strMealThumb"] as? String)?.trimmingCharacters(in: .whitespacesAndNewlines)
+        idMeal = (values["idMeal"] as? String)?.trimmingCharacters(in: .whitespacesAndNewlines)
     }
 }
 
@@ -30,29 +30,34 @@ struct Ingredient: Identifiable {
     let description: String?
     
     init?(measurement: String?, description: String?) {
-        if measurement == nil, description == nil {
+        let trimmedMeasurment = measurement?.trimmingCharacters(in: .whitespacesAndNewlines)
+        let trimmedDescription = description?.trimmingCharacters(in: .whitespacesAndNewlines)
+        if (trimmedMeasurment ?? "").isEmpty, (trimmedDescription ?? "").isEmpty {
             return nil
         }
-        self.measurement = measurement
-        self.description = description
+        self.measurement = trimmedMeasurment
+        self.description = trimmedDescription
     }
 }
+
 
 class Recipe {
     let idMeal: String?
     let strMeal: String?
     let strInstructions: String?
+    let strMealThumb: String?
     let ingredients: [Ingredient]
-    
+
     init?(data: [String:Any]?) {
         guard let values = data else {
             return nil
         }
         
         idMeal = values["idMeal"] as? String
-        strMeal = values["strMeal"] as? String
-        strInstructions = values["strInstructions"] as? String
-        
+        strMeal = (values["strMeal"] as? String)?.trimmingCharacters(in: .whitespacesAndNewlines)
+        strInstructions = (values["strInstructions"] as? String)?.trimmingCharacters(in: .whitespacesAndNewlines)
+        strMealThumb = (values["strMealThumb"] as? String)?.trimmingCharacters(in: .whitespacesAndNewlines)
+
         var workIngredients = [Ingredient]()
         for num in 1...20 {
             if let ingredient = Ingredient(measurement: values["strMeasure\(num)"] as? String,

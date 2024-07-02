@@ -10,6 +10,7 @@
 		CF2850D32C338C7100BB5890 /* LiveDatasource.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF2850D22C338C7100BB5890 /* LiveDatasource.swift */; };
 		CF2850D52C338C8B00BB5890 /* Api.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF2850D42C338C8B00BB5890 /* Api.swift */; };
 		CF2850D72C338DA700BB5890 /* Mvvm.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF2850D62C338DA700BB5890 /* Mvvm.swift */; };
+		CF2850DB2C33916700BB5890 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = CF2850DA2C33916700BB5890 /* Kingfisher */; };
 		CF4D44282C31F0EE00822984 /* MockDatasource.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF4D44272C31F0EE00822984 /* MockDatasource.swift */; };
 		CF4D442A2C31FA1D00822984 /* ApiDatasource.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF4D44292C31FA1D00822984 /* ApiDatasource.swift */; };
 		CF4D442C2C322BD200822984 /* RecipeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF4D442B2C322BD200822984 /* RecipeView.swift */; };
@@ -65,6 +66,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CF2850DB2C33916700BB5890 /* Kingfisher in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -85,13 +87,20 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		CF2850D92C33916700BB5890 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		CF4D44252C31F0D400822984 /* Network */ = {
 			isa = PBXGroup;
 			children = (
 				CF2850D42C338C8B00BB5890 /* Api.swift */,
 				CF4D44292C31FA1D00822984 /* ApiDatasource.swift */,
-				CF4D44272C31F0EE00822984 /* MockDatasource.swift */,
 				CF2850D22C338C7100BB5890 /* LiveDatasource.swift */,
+				CF4D44272C31F0EE00822984 /* MockDatasource.swift */,
 				CF2850D62C338DA700BB5890 /* Mvvm.swift */,
 			);
 			path = Network;
@@ -104,6 +113,7 @@
 				CF985EAF2C305E3E00DE9DB4 /* Fetch-RecipesTests */,
 				CF985EB92C305E3E00DE9DB4 /* Fetch-RecipesUITests */,
 				CF985E9D2C305E3D00DE9DB4 /* Products */,
+				CF2850D92C33916700BB5890 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -180,6 +190,9 @@
 			dependencies = (
 			);
 			name = "Fetch-Recipes";
+			packageProductDependencies = (
+				CF2850DA2C33916700BB5890 /* Kingfisher */,
+			);
 			productName = "Fetch-Recipes";
 			productReference = CF985E9C2C305E3D00DE9DB4 /* Fetch-Recipes.app */;
 			productType = "com.apple.product-type.application";
@@ -252,6 +265,9 @@
 				Base,
 			);
 			mainGroup = CF985E932C305E3D00DE9DB4;
+			packageReferences = (
+				CF2850D82C33911900BB5890 /* XCRemoteSwiftPackageReference "Kingfisher" */,
+			);
 			productRefGroup = CF985E9D2C305E3D00DE9DB4 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -626,6 +642,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		CF2850D82C33911900BB5890 /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/onevcat/Kingfisher.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 7.12.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		CF2850DA2C33916700BB5890 /* Kingfisher */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CF2850D82C33911900BB5890 /* XCRemoteSwiftPackageReference "Kingfisher" */;
+			productName = Kingfisher;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = CF985E942C305E3D00DE9DB4 /* Project object */;
 }

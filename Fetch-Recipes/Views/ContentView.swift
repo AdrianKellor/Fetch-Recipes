@@ -17,7 +17,7 @@ struct ContentView: View {
                 if viewModel.loading {
                     ProgressView()
                 } else {
-                    List(viewModel.meals) { meal in
+                    List(viewModel.meals.sorted {($0.strMeal ?? "") < ($1.strMeal ?? "")}) { meal in
                         NavigationLink(destination: RecipeView(viewModel: RecipeView.ViewModel(meal: meal, api: viewModel.api))) {
                             MealListItem(meal: meal)
                         }

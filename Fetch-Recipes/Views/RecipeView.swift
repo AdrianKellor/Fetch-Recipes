@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Kingfisher
 
 struct RecipeView: View {
     
@@ -14,10 +15,16 @@ struct RecipeView: View {
     var body: some View {
         ScrollView {
             VStack(spacing: 20, content: {
-                Text("Image")
                 Text(viewModel.recipe?.strMeal ?? "")
-                Text(viewModel.recipe?.strInstructions ?? "")
+                    .bold()
+
+                if let url = viewModel.recipe?.strMealThumb {
+                    KFImage(URL(string: url))
+                        .resizable()
+                        .frame(width: 200, height: 200)
+                }
                 
+                Text("Ingredients:")
                 VStack(alignment:.leading) {
                     ForEach(viewModel.recipe?.ingredients ?? []) { Ingredient in
                         HStack(alignment: .top) {
@@ -26,6 +33,10 @@ struct RecipeView: View {
                         }
                     }
                 }
+
+                Text("Instructions:")
+                
+                Text(viewModel.recipe?.strInstructions ?? "")
                 
             })
         }
@@ -76,12 +87,21 @@ extension RecipeView {
 
 struct RecipeView_Preview: PreviewProvider {
 
-    static let meal = Meal (data: ["strMeal": "Clam Chowder",
-                                   "strMealThumb": "",
-                                   "idMeal": "123"])
+    static let mockApi = Api(apiDatasource: MockDatasource())
+    static let meal = Meal (data: ["strMeal": "Apam balik",
+                                   "strMealThumb": "https://www.themealdb.com/images/media/meals/adxcbq1619787919.jpg",
+                                   "idMeal": "53049"])
 
     static var previews: some View {
-        RecipeView(viewModel: RecipeView.ViewModel(meal: meal!, api: Api(apiDatasource: MockDatasource())))
+        
+        let viewModel = RecipeView.ViewModel(meal: meal!, api: mockApi)
+        
+        RecipeView(viewModel: viewModel)
+            .onAppear() {
+                Task {
+                    viewModel.recipe = try await mockApi.GET_meal(id: "anyId")
+                }
+            }
     }
 }
 

@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Kingfisher
 
 struct MealListItem: View {
     
@@ -16,18 +17,19 @@ struct MealListItem: View {
     }
     
     var body: some View {
-        VStack(spacing: 36, content: {
+        VStack(spacing: 4, content: {
             HStack {
-                Group {
-                    Text("Image")
-                        .frame(width: 64, height: 64)
+                if let url = viewModel.meal.strMealThumb {
+                    KFImage(URL(string: url)!)
+                        .resizable()
+                        .frame(width: 48, height: 48)
+                } else {
+                    Spacer()
                 }
-                Group {
-                    Text(viewModel.meal.strMeal ?? "")
-                }
+                Text(viewModel.meal.strMeal ?? "")
             }
         })
-        .frame(height: 64)
+        .frame(height: 48)
     }
 }
 
@@ -42,29 +44,17 @@ extension MealListItem {
 }
 
 struct MealListItem_Preview: PreviewProvider {
-//    static let recipe = Recipe(data: ["strInstructions": "Instructions go here",
-//                                      "strMeal": "Clam Chowder",
-//                                      "strMeasure1": "1 tsp",
-//                                      "strIngredient1": "Clams"])
-//
-//    let idMeal: String?
-//    let strMeal: String?
-//    let strInstructions: String?
-//    let ingredients: [Ingredient]
-//
-//    static var previews: some View {
-//        MealListItem(viewModel: MealListItem.ViewModel(recipe: recipe!))
-//    }
   
     let strMeal: String?
     let strMealThumb: String?
     let idMeal: String?
 
     
-    static let meal = Meal (data: ["strMeal": "Clam Chowder",
-                                   "strMealThumb": "",
-                                   "idMeal": "123"])
+    static let meal = Meal (data: ["strMeal": "Apple & Blackberry Crumble",
+                                   "strMealThumb": "https://www.themealdb.com/images/media/meals/xvsurr1511719182.jpg",
+                                   "idMeal": "52893"])
 
+    
     static var previews: some View {
         MealListItem(meal: meal!)
     }
