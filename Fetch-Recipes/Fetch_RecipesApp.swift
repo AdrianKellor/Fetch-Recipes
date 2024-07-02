@@ -11,7 +11,7 @@ import SwiftUI
 struct Fetch_RecipesApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView(viewModel: ContentView.ViewModel(api: LiveApi()))
+            ContentView(viewModel: ContentView.ViewModel(api: Api(apiDatasource: LiveDatasource())))
         }
     }
 }

@@ -32,7 +32,6 @@ struct ContentView: View {
             .navigationTitle("Fetch Desserts")
             .navigationBarTitleDisplayMode(.inline)
         }
-        .padding(EdgeInsets(top: 10, leading: 24, bottom: 10, trailing: 24 ))
         .onAppear() {
             Task {
                 await viewModel.retrieveDesserts()
@@ -46,11 +45,11 @@ extension ContentView {
     @MainActor
     final class ViewModel: ObservableObject {
         
-        let api: ApiDatasource
+        let api: Api
         @Published var loading = true
         @Published var meals = [Meal]()
 
-        init(api: ApiDatasource) {
+        init(api: Api) {
             self.api = api
         }
         
@@ -67,6 +66,6 @@ extension ContentView {
 }
 
 #Preview {
-    ContentView(viewModel: ContentView.ViewModel(api: MockAPI()))
+    ContentView(viewModel: ContentView.ViewModel(api: Api(apiDatasource: MockDatasource())))
 }
  

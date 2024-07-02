@@ -29,6 +29,7 @@ struct RecipeView: View {
                 
             })
         }
+        .padding(EdgeInsets(top: 10, leading: 24, bottom: 10, trailing: 24 ))
         .onAppear() {
             Task {
                 await viewModel.getRecipe()
@@ -42,12 +43,12 @@ extension RecipeView {
     @MainActor
     final class ViewModel: ObservableObject {
 
-        let api: ApiDatasource
+        let api: Api
         var mealId: String?
         @Published var recipe: Recipe?
         @Published var errorText: String?
         
-        init(meal: Meal, api: ApiDatasource) {
+        init(meal: Meal, api: Api) {
             self.api = api
             if let id = meal.idMeal {
                 mealId = id
@@ -75,16 +76,12 @@ extension RecipeView {
 
 struct RecipeView_Preview: PreviewProvider {
 
-    let strMeal: String?
-    let strMealThumb: String?
-    let idMeal: String?
-    
     static let meal = Meal (data: ["strMeal": "Clam Chowder",
                                    "strMealThumb": "",
                                    "idMeal": "123"])
 
     static var previews: some View {
-        RecipeView(viewModel: RecipeView.ViewModel(meal: meal!, api: MockAPI()))
+        RecipeView(viewModel: RecipeView.ViewModel(meal: meal!, api: Api(apiDatasource: MockDatasource())))
     }
 }
 
